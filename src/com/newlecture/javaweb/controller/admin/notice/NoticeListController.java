@@ -1,4 +1,4 @@
-package com.newlecture.javaweb.controller.customer;
+package com.newlecture.javaweb.controller.admin.notice;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -20,24 +20,32 @@ import com.newlecture.javaweb.dao.NoticeDao;
 import com.newlecture.javaweb.dao.jdbc.JdbcNoticeDao;
 import com.newlecture.javaweb.entity.Notice;
 
-@WebServlet("/customer/notice-list")
+@WebServlet("/admin/notice/list")
 public class NoticeListController extends HttpServlet{
          @Override
          protected void service(
                HttpServletRequest request, 
                HttpServletResponse response) throws ServletException, IOException{ 
          
+        	 //ì¸ì¦ í•œ ì  ì—†ë‹¤-> ë¡œê·¸ì¸
+        	 
+        	 //ì¸ì¦ì •ë³´ ë°›ê³  ê·¸ ì—­í• ì´ ê´€ë¦¬ìì¸ì§€ í™•ì¸
+        	 
+        	 //ì—†ìœ¼ë©´ ê¶Œí•œì—†ìŒì„ ì•Œë¦¼
+        	 
+        	 
+        	 
          String _title = request.getParameter("title");
          String _page = request.getParameter("p");
             
-         int page = 1; //Àü´ŞÀÌ ¾ÈµÆÀ» °æ¿ìÀÇ ±âº»°ª
+         int page = 1; 
          
-         if(_page != null && !_page.equals("")) //È¤½Ã³ª Àü´Ş µÇ¾ú´Ù¸é
-            page = Integer.parseInt(_page); //¹®ÀÚ¿­À» ¼ıÀÚ·Î ÀüÈ¯
+         if(_page != null && !_page.equals("")) 
+            page = Integer.parseInt(_page); 
          
          int offset = (page-1)*10;
          
-         String title=""; //±âº»°ª
+         String title=""; 
          
          if(_title != null && !_title.equals(""))
             title=_title;
@@ -48,7 +56,7 @@ public class NoticeListController extends HttpServlet{
       request.setAttribute("list",  noticeDao.getList(page,title));
       request.setAttribute("count",noticeDao.getCount());
       
-      //response.sendRedirect("notice.jsp"); // »õ·Ó°Ô Ãâ¹ß
-      request.getRequestDispatcher("/WEB-INF/views/customer/notice/list.jsp").forward(request,response); // ÀÌ¾î¼­ Ãâ¹ß
+      //response.sendRedirect("notice.jsp"); 
+      request.getRequestDispatcher("/WEB-INF/views/admin/notice/list.jsp").forward(request,response);
    }
 }
